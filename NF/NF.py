@@ -1,15 +1,15 @@
-def nextfit(vms,server):
-    containers=0
-    rem=server
+def nextfit(vms,server_capacity):
+    servers=0
+    rem=server_capacity
     for x in range(len(vms)):
         if rem>vms[x]:
             rem=rem-vms[x]
         else:
-            containers+=1
-            rem=c-vms[x]
-    return containers
+            servers+=1
+            rem=server_capacity-vms[x]
+    return servers
 
 vms=[2,5,4,7,1,3,8]
-c=10
+server_capacity=10
 
-print("se se necesitan ",nextfit(vms,c)," Contenedores")
+print("se se necesitan ",nextfit(vms,server_capacity)," Contenedores")
