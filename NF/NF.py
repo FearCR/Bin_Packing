@@ -1,5 +1,6 @@
 import time
 from random import randrange
+
 def nextfit(vms,server_capacity, bins):
     vms.sort(reverse=True)
     servers=0
@@ -12,7 +13,8 @@ def nextfit(vms,server_capacity, bins):
             bins.append(server_capacity-rem)
             rem=server_capacity-vms[x]
     return servers
-vms_ammount=1000
+    
+vms_ammount=100
 vms=[]
 server_capacity=10
 bins=[]
