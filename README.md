@@ -1,1 +1,7 @@
-# Bin_Packing
+# Bin Packing
+- [x] Investigar que es bin packing
+- [ ] Programar la solucion optima
+- [ ] Encontrar combinaciones de cantidadespara las cuales se necesite mas tiempo para encontrar la solucion
+## En que consiste el problema de Bin Packing?  
+- 
+
