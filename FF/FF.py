@@ -1,34 +1,33 @@
-import time
-from random import randrange
+import Servidor
+Tam=20
+SR=Servidor.servidor(Tam)
+vmList=[11,2,15,5,6,17,7]
+srList=[]
+srList.append(SR)
+agregado=False
 
-def firstfit(vms,server_capacity):
-    servers=0;
-    server_rem=[0]*len(vms)
+for i in vmList:
+    for j in srList:
+        if i<j.getTam():
+            newTam=j.getTam()-i
+            j.setVm(i)
+            j.setNewTam(newTam)
+            agregado = True
+            break
+    if agregado == False:
+        newSR = Servidor.servidor(Tam)
+        newTam = newSR.getTam() - i
+        newSR.setVm(i)
+        newSR.setNewTam(newTam)
+        srList.append(newSR)
+    else:
+        agregado = False
 
-    for i in range(len(vms)):
-        count=0
-        for j in range(servers):
-            count=j
-            if server_rem[j]>=vms[i]:
-                server_rem[j]=server_rem[j]-vms[i]
-                break
-            count=count+1
-        if count==servers:
-            server_rem[servers]=(server_capacity-vms[i])
-            servers=servers+1
-    return servers
+print("Se ocupan: ",len(srList), "servidores")
 
-vms_ammount=100
-vms=[]
-server_capacity=10
-
-for x in range(vms_ammount):
-    vms.append(randrange(1,server_capacity))
-
-
-start_time=time.time()
-server_ammount=firstfit(vms,server_capacity)
-elapsed_time=time.time()-start_time
-
-print("se se necesitan ",server_ammount," Servidores de capacidad ",server_capacity, "para las ", len(vms), "maquinas virtuales especificadas")
-print("tiempo en que se encontro esta solucion optima=",elapsed_time)
+cant=0
+for j in srList:
+    cant=cant+1
+    print("Servidor ",cant," con: ")
+    print(j.vmList)
+    print("Tamaño disponible: ",j.getTam())
