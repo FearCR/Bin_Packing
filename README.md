@@ -6,15 +6,15 @@ Para este proyecto se usara una versión imaginando maquinas virtuales y una inf
 - [ ] Encontrar combinaciones de cantida despara las cuales se necesite mas tiempo para encontrar la solucion
 
 **SEGUNDA PARTE**
-- [ ] Programar algoritmo Heuristico en version online (aproximacion)
+- [ ] Programar algoritmo Heuristico en version online (aproximacion)  
 **explicacion:**
 
 **TERCERA PARTE**
-- [ ] Programar algoritmo Heuristico en version offline (aproximacion)
+- [ ] Programar algoritmo Heuristico en version offline (aproximacion)  
 **explicacion:**
 
 **CUARTA PARTE**
-- [ ] Programar algoritmo Metaheuristico (aproximacion)
+- [ ] Programar algoritmo Metaheuristico (aproximacion)  
 **explicacion:**
 
 
