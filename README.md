@@ -1,9 +1,26 @@
 # Bin Packing  
 Para este proyecto se usara una versión imaginando maquinas virtuales y una infraestructura definida.   
+**PRIMERA PARTE**
 - [x] Investigar que es bin packing
-- [ ] Programar la solucion optima
-- [ ] Encontrar combinaciones de cantidadespara las cuales se necesite mas tiempo para encontrar la solucion
+- [ ] Programar la solucion optima(Fuerza bruta)
+- [ ] Encontrar combinaciones de cantida despara las cuales se necesite mas tiempo para encontrar la solucion
+
+**SEGUNDA PARTE**
+- [ ] Programar algoritmo Heuristico en version online (aproximacion)
+**explicacion:**
+
+**TERCERA PARTE**
+- [ ] Programar algoritmo Heuristico en version offline (aproximacion)
+**explicacion:**
+
+**CUARTA PARTE**
+- [ ] Programar algoritmo Metaheuristico (aproximacion)
+**explicacion:**
+
+
+
 ## En que consiste el problema de Bin Packing?  
+
 - Items de diferentes tamaños deben ser empacados en un numero finito de contenedores de tamaño fijo de manera que se minimize el numero de contenedores usado. (Combinatorial NP-Hard problem)  
 ## Como se puede programar la solución óptima?  
 - Puede ayudar ordenar  la lista de items de manera decendiente. (first fit decreasing algorithm) aunque esto no garantiza una solucion optima.
