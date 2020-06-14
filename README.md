@@ -2,8 +2,8 @@
 Para este proyecto se usara una versión imaginando maquinas virtuales y una infraestructura definida.   
 **PRIMERA PARTE**
 - [x] Investigar que es bin packing
-- [ ] Programar la solucion optima(Fuerza bruta)
-- [ ] Encontrar combinaciones de cantida despara las cuales se necesite mas tiempo para encontrar la solucion
+- [x] Programar la solucion optima(Fuerza bruta)
+- [ ] Encontrar combinaciones de cantidades para las cuales se necesite mas tiempo para encontrar la solucion
 
 **SEGUNDA PARTE**
 - [ ] Programar algoritmo Heuristico en version online (aproximacion)  
