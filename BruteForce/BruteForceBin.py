@@ -1,11 +1,11 @@
 import time
-def perms(elements):
-    if len(elements) <=1:
-        yield elements
+def perms(elements_tp):
+    if len(elements_tp) <=1:
+        yield elements_tp
     else:
-        for perm in perms(elements[1:]):
-            for i in range(len(elements)):
-                yield perm[:i] + elements[0:1] + perm[i:]
+        for perm in perms(elements_tp[1:]):
+            for i in range(len(elements_tp)):
+                yield perm[:i] + elements_tp[0:1] + perm[i:]
 
 
 
@@ -23,17 +23,18 @@ def VM_allocate(vms, server_capacity):#next fit
 
 
 if __name__ == '__main__':
-    VM_list=(4,8,1,4,2,1,9,9,1,1)
+    VM_tuple=(4,8,1,4,2,1,9,9,1)
+    VM_list=list(VM_tuple)
     server_capacity=10
     min_bins=999999999
     order=[]
     t0=time.time()
-    for i in perms(VM_list):
+    for i in perms(VM_tuple):
         temp=VM_allocate(i,server_capacity)
         if min_bins>temp:
             min_bins=temp
             order=i
     elapsed=time.time()-t0
-    print ("se necesita un minimo de ", min_bins,"servidores de capacidad",server_capacity,"en el orden",order)
+    print ("se necesita un minimo de ", min_bins,"servidores de capacidad",server_capacity,"en el orden",list(order))
     print ("Esta solucion optima se encontro en",elapsed,"segundos")
     exit()
