@@ -7,15 +7,17 @@ Para este proyecto se usara una versión imaginando maquinas virtuales y una inf
 
 **SEGUNDA PARTE**
 - [ ] Programar algoritmo Heuristico en version online (aproximacion)  
-**explicacion:**
+**explicacion:** Algoritmo que tiene el problema de poder caer en minimos locales, un nuevo bin se abre si no cabe en los anteriores (first fit)
+                 online: llegan solicitudes 1 por 1 no se puede modificar el orden de la lista  
 
 **TERCERA PARTE**
 - [ ] Programar algoritmo Heuristico en version offline (aproximacion)  
-**explicacion:**
-
+**explicacion:** Algoritmo que tiene el problema de poder caer en minimos locales (first fit Decreasing o modified FFD)   
+                  offonline: se tiene visibilidad sobre toda la lista por lo que se puede modificar  
+                  
 **CUARTA PARTE**
 - [ ] Programar algoritmo Metaheuristico (aproximacion)  
-**explicacion:**
+**explicacion:** Algoritmos que mediante distintas estrategias intentan evitar el problema de caer en minimos locales(taboo,genetic,annealing)  
 
 
 
