@@ -53,12 +53,13 @@ def mating(parent1,parent2):
     return child
 
 def GeneticAlgorithm(vms,population,server_capacity):
+    elapsed=0
     generations=0
     minimum_found_generation=0
     minimum_found=len(vms)+1
     time_pased=0
     minimum_array=[]
-
+    t0=time.time()
     try:
         while True:
             children=[]
@@ -73,10 +74,11 @@ def GeneticAlgorithm(vms,population,server_capacity):
             for i in range(len(children)):
                 temp=first_fit(children[i],server_capacity)
                 if temp<minimum_found:
+                    elapsed=time.time()-t0
                     minimum_found=temp
                     minimum_found_generation=generations
                     minimum_array=children[i]
-            print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| generacion en que se encontro:",minimum_found_generation)
+            print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| generacion en que se encontro:",minimum_found_generation,"| Tiempo transcurrido:",elapsed,"segundos")
     except KeyboardInterrupt:
         print("\nse ha salido del programa")
         sys.exit()
@@ -88,7 +90,7 @@ def main():
     totalMem=0
     vm_list=[]
     server_capacity=100
-    population=4
+    population=10
     for i in range(1000):
         mem=randrange(1,server_capacity)
         vm_list.append((i,mem))
