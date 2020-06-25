@@ -15,7 +15,7 @@ Para este proyecto se usara una versión imaginando maquinas virtuales y una inf
                   offonline: se tiene visibilidad sobre toda la lista por lo que se puede modificar  
                   
 **CUARTA PARTE**
-- [ ] Programar algoritmo Metaheuristico (aproximacion)  
+- [x] Programar algoritmo Metaheuristico (aproximacion)  
 **explicacion:** Algoritmos que mediante distintas estrategias intentan evitar el problema de caer en minimos locales(taboo,genetic,annealing)  
 
 
