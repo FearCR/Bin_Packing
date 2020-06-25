@@ -20,7 +20,7 @@ def first_fit(vms,server_capacity):
         if count==servers:
             server_rem[servers] = (server_capacity - vms[i][1])
             servers = servers + 1
-    return servers
+    return servers+1
 
 
 
@@ -41,10 +41,13 @@ def mating(parent1,parent2):
     for i in range(genes1):
         child.append(parent1[i])
 
-    for i in range(genes2):
-        index=randrange(1,int(len(parent1)))
-        
-
+    for i in range(len(parent2)):
+        existe=False
+        for j in range(len(child)):
+            if parent2[i][0]==child[j][0]:
+                existe=True
+        if existe==False:
+            child.append(parent2[i])
 
 
     return child
@@ -52,29 +55,44 @@ def mating(parent1,parent2):
 def GeneticAlgorithm(vms,population,server_capacity):
     generations=0
     minimum_found_generation=0
-    minimum_found=len(vms+1)
+    minimum_found=len(vms)+1
     time_pased=0
+    minimum_array=[]
 
     try:
-        x=0
-        while x<1000:
+        while True:
+            children=[]
+            new_generation=[]
             #os.system('cls' if os.name=='nt' else 'clear')
             new_generation=generate_population(vms,population)
-            print(new_generation)
-            x=x+1
+            generations=generations+1
+            for i in range(int(len(new_generation)/2)):
+                parent1=randrange(population)
+                parent2=randrange(population)
+                children.append(mating(new_generation[parent1],new_generation[parent2]))
+            for i in range(len(children)):
+                temp=first_fit(children[i],server_capacity)
+                if temp<minimum_found:
+                    minimum_found=temp
+                    minimum_found_generation=generations
+                    minimum_array=children[i]
+            print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| generacion en que se encontro:",minimum_found_generation)
     except KeyboardInterrupt:
-        print("se ha salido del programa")
+        print("\nse ha salido del programa")
         sys.exit()
 
 
     return
 
 def main():
-    vm_list=[('0',1),('1',1),('2',1),('3',1),('4',1)]
-    population_array=generate_population(vm_list,2)
-    #GeneticAlgorithm(vm_list,4,10)
-    child=mating(population_array[0],population_array[1])
-    print(child)
+    vm_list=[]
+    server_capacity=10
+    population=4
+    for i in range(1000):
+        vm_list.append((i,randrange(1,server_capacity)))
+
+    GeneticAlgorithm(vm_list,population,server_capacity)
+
 
 
 if __name__ == '__main__':
