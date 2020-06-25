@@ -85,12 +85,17 @@ def GeneticAlgorithm(vms,population,server_capacity):
     return
 
 def main():
+    totalMem=0
     vm_list=[]
-    server_capacity=10
+    server_capacity=100
     population=4
     for i in range(1000):
-        vm_list.append((i,randrange(1,server_capacity)))
-
+        mem=randrange(1,server_capacity)
+        vm_list.append((i,mem))
+        totalMem=totalMem+mem
+    print("memoria total de las maquinas virtuales:",totalMem)
+    ff_attempt=first_fit(vm_list,server_capacity)
+    print("intento con heuristica first fit, bins usados:",ff_attempt)
     GeneticAlgorithm(vm_list,population,server_capacity)
 
 
