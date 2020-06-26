@@ -65,13 +65,15 @@ def GeneticAlgorithm(vms,population,server_capacity):
     time_pased=0
     minimum_array=[]
     t0=time.time()
+    stable_generations=0
     try:
-        while True:
+        while stable_generations<100:
             children=[]
             new_generation=[]
             #os.system('cls' if os.name=='nt' else 'clear')
             new_generation=generate_population(vms,population)
             generations=generations+1
+            stable_generations=stable_generations+1
             for i in range(int(len(new_generation)/2)):
                 parent1=randrange(population)
                 parent2=randrange(population)
@@ -79,10 +81,11 @@ def GeneticAlgorithm(vms,population,server_capacity):
             for i in range(len(children)):
                 temp=first_fit(children[i],server_capacity)
                 if temp<minimum_found:
+                    stable_generations=0
                     elapsed=time.time()-t0
                     minimum_found=temp
                     minimum_found_generation=generations
-                    minimum_array=children[i]                
+                    minimum_array=children[i]
             print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| Encontrado en Generacion:",minimum_found_generation,"| Tardo en encontrarlo:",elapsed,"segundos")
             y.append(minimum_found)
             x.append(generations)
@@ -97,6 +100,18 @@ def GeneticAlgorithm(vms,population,server_capacity):
         plt.title('Genetic Algorithm')
         plt.show()
         sys.exit()
+    #en caso de que no se haga un interrupt y se haga una condicion de parada:
+    print("\nNo ha habido mejoria en",stable_generations,"generaciones")
+    print("se ha salido del programa")
+    print("tiempo total de ejecucion:",time.time()-t0)
+    print("Mejor solucion enconrada:")
+    print("Generacion:",generations,"| Solucion:",minimum_found,"| Encontrado en Generacion:",minimum_found_generation,"| Tardo en encontrarlo:",elapsed,"segundos")
+    plt.plot(x,y)
+    plt.xlabel('Generacion')
+    plt.ylabel('Solucion encontrada')
+    plt.title('Genetic Algorithm')
+    plt.show()
+    sys.exit()
     return
 
 def main():
