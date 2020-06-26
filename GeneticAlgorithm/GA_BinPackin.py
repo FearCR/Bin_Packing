@@ -3,6 +3,7 @@ from random import randrange
 import random
 import os
 import sys
+import matplotlib.pyplot as plt
 
 #Heuristica Online normal que calcula la cantidad de servidores usada dado un arreglo de maquinas virtuales
 def first_fit(vms,server_capacity):
@@ -55,6 +56,8 @@ def mating(parent1,parent2):
 #algoritmo genetico que busca la cantidad minima de servidores de tamano fijo para almacenar un conunto de maquinas virtuales
 # con tamanos distintos
 def GeneticAlgorithm(vms,population,server_capacity):
+    x=[]
+    y=[]
     elapsed=0
     generations=0
     minimum_found_generation=0
@@ -79,13 +82,20 @@ def GeneticAlgorithm(vms,population,server_capacity):
                     elapsed=time.time()-t0
                     minimum_found=temp
                     minimum_found_generation=generations
-                    minimum_array=children[i]
+                    minimum_array=children[i]                
             print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| Encontrado en Generacion:",minimum_found_generation,"| Tardo en encontrarlo:",elapsed,"segundos")
+            y.append(minimum_found)
+            x.append(generations)
     except KeyboardInterrupt:
         print("\nse ha salido del programa")
         print("tiempo total de ejecucion:",time.time()-t0)
         print("Mejor solucion enconrada:")
         print("Generacion:",generations,"| Solucion:",minimum_found,"| Encontrado en Generacion:",minimum_found_generation,"| Tardo en encontrarlo:",elapsed,"segundos")
+        plt.plot(x,y)
+        plt.xlabel('Generacion')
+        plt.ylabel('Solucion encontrada')
+        plt.title('Genetic Algorithm')
+        plt.show()
         sys.exit()
     return
 
