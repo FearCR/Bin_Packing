@@ -30,4 +30,4 @@ Para este proyecto se usara una versión imaginando maquinas virtuales y una inf
 ## Como se puede programar la solución aproximada? (con heuristicas online)  
 - Puede ayudar ordenar  la lista de items de manera decendiente. (first fit decreasing algorithm) aunque esto no garantiza una solucion optima.
 ## Como se puede programar la solución aproximada? (con metaheuristicas)   
-
+- Se usó un algoritmo genético, en el cual se intenta evitar caer en mínimos locales creando generaciones de población de un tamaño fijo(cada miembro de la población es una combinación al azar de la lista de vms). Se hace un proceso de "mating" en el cual se combinan los genes de parejas de padres en sus hijos para encontrar soluciones óptimas.
