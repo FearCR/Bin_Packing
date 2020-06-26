@@ -4,7 +4,7 @@ import random
 import os
 import sys
 
-#Heuristica normal que calcula la cantidad de servidores usada dado un arreglo de maquinas virtuales
+#Heuristica Online normal que calcula la cantidad de servidores usada dado un arreglo de maquinas virtuales
 def first_fit(vms,server_capacity):
     servers=0;
     server_rem=[0]*len(vms)
@@ -20,10 +20,10 @@ def first_fit(vms,server_capacity):
         if count==servers:
             server_rem[servers] = (server_capacity - vms[i][1])
             servers = servers + 1
-    return servers+1
+    return servers
 
 
-
+#genera un arreglo de arreglos de maquinas virtuales ordenados al azar
 def generate_population(vms,population):
     population_array=[]
     for i in range(population):
@@ -31,7 +31,7 @@ def generate_population(vms,population):
     return population_array
 
 
-
+#genera una cantidad determinada de hijos con parejas de arreglos(combinando sus elementos al azar sin repetirlos)
 def mating(parent1,parent2):
     child=[]
     genes1=randrange(1,int(len(parent1)))
@@ -52,6 +52,8 @@ def mating(parent1,parent2):
 
     return child
 
+#algoritmo genetico que busca la cantidad minima de servidores de tamano fijo para almacenar un conunto de maquinas virtuales
+# con tamanos distintos
 def GeneticAlgorithm(vms,population,server_capacity):
     elapsed=0
     generations=0
@@ -78,12 +80,13 @@ def GeneticAlgorithm(vms,population,server_capacity):
                     minimum_found=temp
                     minimum_found_generation=generations
                     minimum_array=children[i]
-            print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| generacion en que se encontro:",minimum_found_generation,"| Tiempo transcurrido:",elapsed,"segundos")
+            print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| Encontrado en Generacion:",minimum_found_generation,"| Tardo en encontrarlo:",elapsed,"segundos")
     except KeyboardInterrupt:
         print("\nse ha salido del programa")
+        print("tiempo total de ejecucion:",time.time()-t0)
+        print("Mejor solucion enconrada:")
+        print("Generacion:",generations,"| Solucion:",minimum_found,"| Encontrado en Generacion:",minimum_found_generation,"| Tardo en encontrarlo:",elapsed,"segundos")
         sys.exit()
-
-
     return
 
 def main():
