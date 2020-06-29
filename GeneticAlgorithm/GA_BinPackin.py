@@ -23,7 +23,22 @@ def first_fit(vms,server_capacity):
             servers = servers + 1
     return servers
 
-
+def decreasing_first_fit(vms,server_capacity):
+    servers=0;
+    server_rem=[0]*len(vms)
+    vms.sort(reverse=True)
+    for i in range(len(vms)):
+        count=0
+        for j in range(servers):
+            count=j
+            if server_rem[j] >= vms[i]:
+                server_rem[j] =  server_rem[j] - vms[i]
+                break
+            count=count+1
+        if count==servers:
+            server_rem[servers] = (server_capacity - vms[i])
+            servers = servers + 1
+    return servers
 #genera un arreglo de arreglos de maquinas virtuales ordenados al azar
 def generate_population(vms,population):
     population_array=[]
@@ -94,7 +109,7 @@ def GeneticAlgorithm(vms,population,server_capacity):
                     minimum_found=temp
                     minimum_found_generation=generations
                     minimum_array=children[i]
-            print("generacion actual:",generations,"| cantidad de servers minima:",minimum_found,"| Encontrado en Generacion:",minimum_found_generation,"| Tardo en encontrarlo:",elapsed,"segundos")
+            print("generacion actual:\033[94m",generations,"\033[0m| cantidad de servers minima:\033[92m",minimum_found,"\033[m| Encontrado en Generacion:\033[92m",minimum_found_generation,"\033[0m| Tardo en encontrarlo:\033[92m",elapsed,"segundos\033[0m")
             y.append(minimum_found)
             x.append(generations)
     except KeyboardInterrupt:
@@ -123,8 +138,15 @@ def GeneticAlgorithm(vms,population,server_capacity):
     return
 
 def main():
-    totalMem=0
+    """
+    testList1=[(0,98),(1,65),(2,34),(3,83),(4,74),(5,56),(6,34),(7,12),(8,3),(9,86),(10,36),(11,83),(12,23),(13,54),(14,96),(15,58),(16,77),(17,88),(18,40),(19,23),(20,43),(21,65),(22,86),(23,32),(24,22),(25,28),(26,99),(27,73),(28,65),(29,77),(30,43),(31,35),(32,37),(33,66),(34,88),(35,2),(36,54),(37,24),(38,19),(39,25),(40,55),(41,75),(42,54),(43,24),(44,73),(45,79),(46,59),(47,90),(48,10),(49,56)]
+    testList2=[(0,98),(1,65),(2,34),(3,83),(4,74),(5,56),(6,34),(7,12),(8,3),(9,86),(10,36),(11,83),(12,23),(13,54),(14,96),(15,58),(16,77),(17,88),(18,40),(19,23),(20,43),(21,65),(22,86),(23,32),(24,22),(25,28),(26,99),(27,73),(28,65),(29,77),(30,43),(31,35),(32,37),(33,66),(34,88),(35,2),(36,54),(37,24),(38,19),(39,25),(40,55),(41,75),(42,54),(43,24),(44,73),(45,79),(46,59),(47,90),(48,10),(49,56)]
+    testList3=[98,65,34,83,74,56,34,12,3,86,36,83,23,54,96,58,77,88,40,23,43,65,86,32,22,28,99,73,65,77,43,35,37,66,88,2,54,24,19,25,55,75,54,24,73,79,59,90,10,56]
+    ff_attempt=first_fit(testList1,server_capacity)
+    dff_attempt=decreasing_first_fit(testList3,server_capacity)
+    """
     vm_list=[]
+    totalMem=0
     server_capacity=100
     population=10
     for i in range(500):
@@ -133,7 +155,8 @@ def main():
         totalMem=totalMem+mem
     print("memoria total de las maquinas virtuales:",totalMem)
     ff_attempt=first_fit(vm_list,server_capacity)
-    print("intento con heuristica first fit, bins usados:",ff_attempt)
+    print("resultado con heuristica first fit, servers usados:",ff_attempt)
+#    print("resultado con heuristica decreasing first fit, servers usados:",dff_attempt)
     GeneticAlgorithm(vm_list,population,server_capacity)
 
 
