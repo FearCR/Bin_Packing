@@ -47,6 +47,7 @@ def mating(parent1,parent2):
         for j in range(len(child)):
             if parent2[i][0]==child[j][0]:
                 existe=True
+                break
         if existe==False:
             child.append(parent2[i])
 
@@ -66,8 +67,9 @@ def GeneticAlgorithm(vms,population,server_capacity):
     minimum_array=[]
     t0=time.time()
     stable_generations=0
+    mutation_percentage=5
     try:
-        while stable_generations<100:
+        while stable_generations<200:
             children=[]
             new_generation=[]
             #os.system('cls' if os.name=='nt' else 'clear')
@@ -79,6 +81,12 @@ def GeneticAlgorithm(vms,population,server_capacity):
                 parent2=randrange(population)
                 children.append(mating(new_generation[parent1],new_generation[parent2]))
             for i in range(len(children)):
+                #mutation
+                mutation=randrange(1,100)
+                if mutation<=mutation_percentage:
+                    pos1=randrange(len(children[i]))
+                    pos2=randrange(len(children[i]))
+                    children[i][pos1],children[i][pos2]=children[i][pos2],children[i][pos1]
                 temp=first_fit(children[i],server_capacity)
                 if temp<minimum_found:
                     stable_generations=0
@@ -119,7 +127,7 @@ def main():
     vm_list=[]
     server_capacity=100
     population=10
-    for i in range(1000):
+    for i in range(500):
         mem=randrange(1,server_capacity)
         vm_list.append((i,mem))
         totalMem=totalMem+mem
